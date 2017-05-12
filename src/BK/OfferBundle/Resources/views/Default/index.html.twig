@@ -3,25 +3,25 @@
 {% block content %}
     <h1>Offers list</h1>
 
-    <table>
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Dateend</th>
-            <th>Actions</th>
+            <th>Expiration date</th>
+            <th>Offer id</th>
         </tr>
         </thead>
         <tbody>
         {% for offer in offers %}
             <tr>
-                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
-                <td>{{ offer.title }}</td>
+
+                <th scope="row">{{ offer.title }}</th>
                 <td>{{ offer.description }}</td>
                 <td>{{ offer.price }}</td>
                 <td>{% if offer.dateEnd %}{{ offer.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ offer.id }}</td>
                 <td>
                     <ul>
                         <li>

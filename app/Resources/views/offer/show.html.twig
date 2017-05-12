@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Offer</h1>
 
-    <table>
+    <table class="table table-hover">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -22,8 +22,8 @@
                 <td>{{ offer.price }}</td>
             </tr>
             <tr>
-                <th>Dateend</th>
-                <td>{% if offer.dateEnd %}{{ offer.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Expiration date</th>
+                <td>{% if offer.dateEnd %}{{ offer.dateEnd|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

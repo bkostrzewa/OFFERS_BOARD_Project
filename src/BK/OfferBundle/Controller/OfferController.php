@@ -21,7 +21,7 @@ class OfferController extends Controller
      *
      * @Route("/", name="offer_index")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction()
     {
@@ -74,6 +74,7 @@ class OfferController extends Controller
      *
      * @Route("/{id}", name="offer_show")
      * @Method("GET")
+     * @Security("has_role('ROLE_USER')")
      */
     public function showAction(Offer $offer)
     {
@@ -90,6 +91,7 @@ class OfferController extends Controller
      *
      * @Route("/{id}/edit", name="offer_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Offer $offer)
     {
