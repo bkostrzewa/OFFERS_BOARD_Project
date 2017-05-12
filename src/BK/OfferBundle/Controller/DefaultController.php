@@ -33,15 +33,13 @@ class DefaultController extends Controller
                 return $this->redirectToRoute("offer_index");
 
             } else if (in_array('ROLE_USER', $userRoles)) {
-                return $this->redirectToRoute("user_offer_index");
+                return $this->redirectToRoute("user_offer_myOffer");
             }
         }
-
-
     }
 
     /**
-     * @Route("/indexShow/{offer}", name="indexShow")
+     * @Route("/allOffer/{offer}", name="allOffer")
      */
     public function showAction(Offer $offer)
     {

@@ -21,18 +21,19 @@ class OfferController extends Controller
      *
      * @Route("/", name="offer_index")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
         $userRoles = $this->getUser()->getRoles();
-        var_dump($userRoles);
+
 
         $em = $this->getDoctrine()->getManager();
 
         $offers = $em->getRepository('BKOfferBundle:Offer')->findAll();
 
         return $this->render('offer/index.html.twig', array(
-            'offers' => $offers, 'role'=>'ADMIN'
+            'offers' => $offers
         ));
 
 
@@ -47,11 +48,14 @@ class OfferController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $offer = new Offer();
         $form = $this->createForm('BK\OfferBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $offer->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();

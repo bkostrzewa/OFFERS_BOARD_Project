@@ -2,15 +2,36 @@
 
 namespace BK\OfferBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UserOffersController extends Controller
 {
     /**
-     * @Route("/index", name="user_offer_index")
+     * @Route("/allOffer/")
+     * @Method("GET")
+     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $offers = $em->getRepository('BKOfferBundle:Offer')->findAll();
+
+        return $this->render('BKOfferBundle:Default:index.html.twig', array(
+            'offers' => $offers,
+        ));
+    }
+
+    /**
+     * @Route("/myOffer", name="user_offer_myOffer")
+     * @Method("GET")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function myOfferAction()
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -20,21 +41,9 @@ class UserOffersController extends Controller
 
 
         return $this->render('BKOfferBundle:UserOffers:index.html.twig', array(
-            'offers' => $offers, 'role'=>'USER'
+            'offers' => $offers
         ));
     }
-
-//    /**
-//     * @Route("/index", name="user_offer_show")
-//     */
-//    public function showAction()
-//    {
-//
-//
-//    }
-
-
-
 
 
 }
