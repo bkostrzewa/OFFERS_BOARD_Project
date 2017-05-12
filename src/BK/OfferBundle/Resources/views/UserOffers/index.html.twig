@@ -1,0 +1,44 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}BKOfferBundle:UserOffers:index{% endblock %}
+
+{% block content %}
+<h1>MY OFFERS</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Dateend</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
+                <td>{{ offer.title }}</td>
+                <td>{{ offer.description }}</td>
+                <td>{{ offer.price }}</td>
+                <td>{% if offer.dateEnd %}{{ offer.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <p> {{ role }} </p>
+        </li>
+    </ul>
+
+{% endblock %}
