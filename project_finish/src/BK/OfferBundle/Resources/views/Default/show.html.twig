@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Offer</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offer.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ offer.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offer.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ offer.price }}</td>
+            </tr>
+            <tr>
+                <th>Dateend</th>
+                <td>{% if offer.dateEnd %}{{ offer.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bk_offer_default_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
